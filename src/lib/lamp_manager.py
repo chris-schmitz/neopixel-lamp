@@ -1,4 +1,4 @@
-class PatternRunner:
+class LampManager:
     def __init__(self, led_strip, strip_length, patterns):
         # TODO: check-> can you get the strip length from `len` on the neopixel instance??
         self.led_strip = led_strip

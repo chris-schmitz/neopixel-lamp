@@ -1,6 +1,7 @@
 # TODO: consider:
 # - right now we have no context of the size of the strip, but do we care??
 # - add in support for running an equation
+# - add knowledge of when to write? auto write? write after full set? something else?
 class Pattern:
     def __init__(self, name, frames):
         self._name = name

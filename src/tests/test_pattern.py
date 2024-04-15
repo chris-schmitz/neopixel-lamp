@@ -4,7 +4,7 @@ from dataclasses import dataclass
 import pytest
 from unittest.mock import MagicMock
 
-from src.lib.patternrunner import PatternRunner
+from src.lib.lamp_manager import LampManager
 from src.lib.pattern import Pattern
 
 

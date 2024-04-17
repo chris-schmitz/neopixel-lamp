@@ -1,14 +1,62 @@
 # import unittest
 from dataclasses import dataclass
+from unittest import mock
 
 import pytest
 from unittest.mock import MagicMock
+
 
 from src.lib.lamp_manager import LampManager
 from src.lib.pattern import Pattern
 
 
+def _build_lamp_manager(
+    strip_constructor_mock,
+    led_state,
+    strip_length=3,
+    initial_brightness=1.0,
+    patterns=None,
+    gpio_pin=1,
+    auto_write=False,
+):
+    if patterns is None:
+        patterns = []
+
+    strip_constructor_mock.return_value = led_state
+
+    return LampManager(
+        strip_constructor=strip_constructor_mock,
+        gpio_pin=gpio_pin,
+        strip_length=strip_length,
+        initial_brightness_level=initial_brightness,
+        patterns=patterns,
+        auto_write=auto_write,
+    )
+
+
 class TestSuite:
+
+    def test_can_initialize_led_strip(self):
+        strip_constructor = MagicMock()
+        strip_length = 3
+        led_state = [None] * 3
+        strip_constructor.return_value = led_state
+        gpio_pin = 1
+        brightness_level = 1.0
+        auto_write = False
+
+        lamp = _build_lamp_manager(
+            strip_constructor_mock=strip_constructor,
+            led_state=led_state,
+            gpio_pin=gpio_pin,
+            strip_length=strip_length,
+            auto_write=auto_write,
+        )
+
+        strip_constructor.assert_called_with(
+            gpio_pin, strip_length, brightness_level, auto_write
+        )
+
     def test_touch_can_set_active_pattern(self):
         patterns = [
             Pattern(
@@ -21,8 +69,11 @@ class TestSuite:
         ]
         strip_length = 3
         led_strip = [None] * strip_length
+        strip_constructor = MagicMock()
 
-        lamp = LampManager(led_strip, strip_length, patterns)
+        lamp = _build_lamp_manager(
+            strip_constructor, led_strip, strip_length, patterns=patterns
+        )
 
         lamp.animate_next_frame()
         assert led_strip[0] == (1, 1, 1)
@@ -60,11 +111,13 @@ class TestSuite:
                 ],
             ),
         ]
+        strip_constructor = MagicMock()
+
         strip_length = 4
         led_strip = [None] * strip_length
 
-        lamp = LampManager(
-            led_strip=led_strip, strip_length=strip_length, patterns=patterns
+        lamp = _build_lamp_manager(
+            strip_constructor, led_strip, strip_length, patterns=patterns
         )
 
         lamp.animate_next_frame()
@@ -106,7 +159,6 @@ class TestSuite:
         assert led_strip[2] == (0, 0, 255)
         assert led_strip[3] == (11, 11, 11)
 
-    def test_touch_can_cycle_brightness(self):
+    def test_can_update_brightness_level(self):
         pass
-        # ! brightness is set at strip object creation. we need to pass
-        # ! the neopixel constructor in and recreate when brightness is changed
+        # ? should the stepping up and down of the brightness level on button click be in this class or in the calling class?

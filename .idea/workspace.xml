@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4cdc05d-5ce5-4f58-899f-724b6b5dbd78" name="Changes" comment="Starts working through lamp animation">
+    <list default="true" id="b4cdc05d-5ce5-4f58-899f-724b6b5dbd78" name="Changes" comment=":facepalm:">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/pattern.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pattern.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/patternrunner.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/lampmanager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/lamp_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/lamp_manager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tests/test_lamp.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/test_lamp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/test_pattern.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/test_pattern.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +27,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 1
 }]]></component>
@@ -45,7 +46,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python tests.Python tests for test_lamp.TestSuite.executor": "Run",
+    "Python tests.Python tests for test_lamp.TestSuite.test_can_initialize_led_strip.executor": "Run",
     "Python tests.Python tests for test_lamp.TestSuite.test_pattern_iteration.executor": "Run",
+    "Python tests.Python tests for test_lamp.TestSuite.test_touch_can_cycle_brightness.executor": "Run",
     "Python tests.Python tests for test_lamp.TestSuite.test_touch_can_set_active_pattern.executor": "Run",
     "Python tests.Python tests for test_lamp.TestSuite.test_touch_can_trigger_pattern.executor": "Debug",
     "Python tests.Python tests for test_lamp.TestSuite.test_touching_buttons_can_switch_between_patterns.executor": "Run",
@@ -63,7 +67,52 @@
       <recent name="$PROJECT_DIR$/src/tests" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests for test_lamp.TestSuite.test_touching_buttons_can_switch_between_patterns">
+  <component name="RunManager" selected="Python tests.Python tests for test_lamp.TestSuite">
+    <configuration name="Python tests for test_lamp.TestSuite" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="rgb-lamp" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_lamp.TestSuite&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_lamp.TestSuite.test_can_initialize_led_strip" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="rgb-lamp" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_lamp.TestSuite.test_can_initialize_led_strip&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_lamp.TestSuite.test_touch_can_cycle_brightness" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="rgb-lamp" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_lamp.TestSuite.test_touch_can_cycle_brightness&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <configuration name="Python tests for test_lamp.TestSuite.test_touch_can_set_active_pattern" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="rgb-lamp" />
       <option name="ENV_FILES" value="" />
@@ -76,21 +125,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;test_lamp.TestSuite.test_touch_can_set_active_pattern&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Python tests for test_lamp.TestSuite.test_touch_can_trigger_pattern" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="rgb-lamp" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_lamp.TestSuite.test_touch_can_trigger_pattern&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -109,43 +143,13 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_pattern.TestSuite.test_pattern_iteration" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="rgb-lamp" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_pattern.TestSuite.test_pattern_iteration&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Python tests in test_lamp.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="rgb-lamp" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/src/tests/test_lamp.py&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Python tests for test_lamp.TestSuite" />
         <item itemvalue="Python tests.Python tests for test_lamp.TestSuite.test_touching_buttons_can_switch_between_patterns" />
         <item itemvalue="Python tests.Python tests for test_lamp.TestSuite.test_touch_can_set_active_pattern" />
-        <item itemvalue="Python tests.Python tests for test_pattern.TestSuite.test_pattern_iteration" />
-        <item itemvalue="Python tests.Python tests for test_lamp.TestSuite.test_touch_can_trigger_pattern" />
-        <item itemvalue="Python tests.Python tests in test_lamp.py" />
+        <item itemvalue="Python tests.Python tests for test_lamp.TestSuite.test_can_initialize_led_strip" />
+        <item itemvalue="Python tests.Python tests for test_lamp.TestSuite.test_touch_can_cycle_brightness" />
       </list>
     </recent_temporary>
   </component>
@@ -173,11 +177,49 @@
       <option name="project" value="LOCAL" />
       <updated>1713150501304</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Moves setting of led strip values into LampManager class">
+      <option name="closed" value="true" />
+      <created>1713190053410</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1713190053410</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Adds readme skeleton">
+      <option name="closed" value="true" />
+      <created>1713190211426</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1713190211426</updated>
+    </task>
+    <task id="LOCAL-00004" summary=":facepalm:">
+      <option name="closed" value="true" />
+      <created>1713190271062</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1713190271062</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Starts working through lamp animation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Starts working through lamp animation" />
+    <MESSAGE value="Moves setting of led strip values into LampManager class" />
+    <MESSAGE value="Adds readme skeleton" />
+    <MESSAGE value=":facepalm:" />
+    <option name="LAST_COMMIT_MESSAGE" value=":facepalm:" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/tests/test_lamp.py</url>
+          <line>39</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

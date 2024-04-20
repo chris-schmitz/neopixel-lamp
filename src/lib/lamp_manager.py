@@ -8,44 +8,66 @@ class LampManager:
         patterns,
         auto_write=False,
     ):
-        self.strip_constructor = strip_constructor
-        self.gpio_pin = gpio_pin
-        self.led_strip = None
-        self.brightness_level = initial_brightness_level
-        self.strip_length = strip_length
-        self.auto_write = auto_write
+        self._strip_constructor = strip_constructor
+        self._gpio_pin = gpio_pin
+        self._led_strip = None
+        self._brightness_level = initial_brightness_level
+        self._strip_length = strip_length
+        self._auto_write = auto_write
         self._initialize_led_strip()
 
-        self.patterns = patterns
+        self._patterns = patterns
         self._active_pattern_index = 0
-
-    def _initialize_led_strip(self):
-        self.led_strip = self.strip_constructor(
-            self.gpio_pin, self.strip_length, self.brightness_level, self.auto_write
-        )
-
-    # def set_brightness_level(self, brightness_level):
-    #     self.led_strip = self.strip_constructor(
-    #         self.gpio_pin, self.strip_length, brightness_level, False
-    #     )
 
     def touch_trigger(self, button_touched):
         match button_touched:
             case 1:
-                self._active_pattern_index += 1
-                if self._active_pattern_index >= len(self.patterns):
-                    self._active_pattern_index = 0
+                self._increment_active_pattern_index()
             case 2:
-                pass  # brightness
+                self._step_down_brightness_level()
+            case _:
+                raise ValueError(f'invalid touch value: "{button_touched}"')
 
     def animate_next_frame(self):
         try:
-            frame = self.patterns[self._active_pattern_index].get_next_frame()
+            frame = self._patterns[self._active_pattern_index].get_next_frame()
             for index, pixel in enumerate(frame):
-                self.led_strip[index] = pixel
+                self._led_strip[index] = pixel
         except IndexError as error:
-            # TODO: switch out for playing default pattern instead
+            # TODO: talk with andrew, how would I test for this?
+            # * the way this class is set up without reaching in to a private property
+            # * there actually isn't a way to induce these exceptions, but I don't want
+            # * to not have the excepts b/c the way this particular method is structured
+            # * in theory it _could_ throw an exception. So do I write a test that takes
+            # * advantage of the "nothing's really private" aspect of python to force a test
+            # * or do I do something else??
             print("Can't determine active pattern. Skipping...")
         except TypeError as error:
             # TODO: switch out for playing default pattern instead
             print("Can't determine active pattern. Skipping...")
+
+    def _initialize_led_strip(self):
+        self._led_strip = self._strip_constructor(
+            self._gpio_pin, self._strip_length, self._brightness_level, self._auto_write
+        )
+
+    def _set_brightness_level(self, brightness_level):
+        self._brightness_level = brightness_level
+        # TODO: Figure out how to assert the deinit call this in the test.
+        # ? https://github.com/adafruit/Adafruit_CircuitPython_NeoPixel/blob/310621f32839b73f892b227650c5d002a310e7c5/neopixel.py#L144
+        # * I think we need to make a magic mock that uses the getattribute and set attribute magic methods
+        # self._led_strip.deinit()
+        self._led_strip = self._strip_constructor(
+            self._gpio_pin, self._strip_length, brightness_level, False
+        )
+
+    def _step_down_brightness_level(self):
+        new_level = round(self._brightness_level - 0.1, 1)
+        if new_level < 0:
+            new_level = 1.0
+        self._set_brightness_level(new_level)
+
+    def _increment_active_pattern_index(self):
+        self._active_pattern_index += 1
+        if self._active_pattern_index >= len(self._patterns):
+            self._active_pattern_index = 0

@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4cdc05d-5ce5-4f58-899f-724b6b5dbd78" name="Changes" comment=":facepalm:">
+    <list default="true" id="b4cdc05d-5ce5-4f58-899f-724b6b5dbd78" name="Changes" comment="refactoring lamp manager class to inject led strip constructor&#10;&#10;This is needed to do the next step which is setting the brightness level">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/lamp_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/lamp_manager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
@@ -27,12 +27,24 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "chris-schmitz"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "git@github.com:chris-schmitz/neopixel-lamp.git",
+    "accountId": "e2d28f61-08b1-4bf3-b5d8-0f625d62638d"
+  }
+}]]></component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2f6QBFycws6due6kzHDNsyhXWD2" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -48,6 +60,8 @@
   "keyToString": {
     "Python tests.Python tests for test_lamp.TestSuite.executor": "Run",
     "Python tests.Python tests for test_lamp.TestSuite.test_can_initialize_led_strip.executor": "Run",
+    "Python tests.Python tests for test_lamp.TestSuite.test_can_update_brightness_level.executor": "Run",
+    "Python tests.Python tests for test_lamp.TestSuite.test_invalid_touch_button_value.executor": "Run",
     "Python tests.Python tests for test_lamp.TestSuite.test_pattern_iteration.executor": "Run",
     "Python tests.Python tests for test_lamp.TestSuite.test_touch_can_cycle_brightness.executor": "Run",
     "Python tests.Python tests for test_lamp.TestSuite.test_touch_can_set_active_pattern.executor": "Run",
@@ -83,7 +97,7 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_lamp.TestSuite.test_can_initialize_led_strip" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for test_lamp.TestSuite.test_can_update_brightness_level" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="rgb-lamp" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -94,11 +108,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_lamp.TestSuite.test_can_initialize_led_strip&quot;" />
+      <option name="_new_target" value="&quot;test_lamp.TestSuite.test_can_update_brightness_level&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_lamp.TestSuite.test_touch_can_cycle_brightness" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for test_lamp.TestSuite.test_invalid_touch_button_value" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="rgb-lamp" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -109,22 +123,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_lamp.TestSuite.test_touch_can_cycle_brightness&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Python tests for test_lamp.TestSuite.test_touch_can_set_active_pattern" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="rgb-lamp" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_lamp.TestSuite.test_touch_can_set_active_pattern&quot;" />
+      <option name="_new_target" value="&quot;test_lamp.TestSuite.test_invalid_touch_button_value&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -143,20 +142,35 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
+    <configuration name="Python tests in test_lamp.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="rgb-lamp" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/src/tests/test_lamp.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python tests.Python tests for test_lamp.TestSuite" />
+        <item itemvalue="Python tests.Python tests for test_lamp.TestSuite.test_invalid_touch_button_value" />
+        <item itemvalue="Python tests.Python tests in test_lamp.py" />
+        <item itemvalue="Python tests.Python tests for test_lamp.TestSuite.test_can_update_brightness_level" />
         <item itemvalue="Python tests.Python tests for test_lamp.TestSuite.test_touching_buttons_can_switch_between_patterns" />
-        <item itemvalue="Python tests.Python tests for test_lamp.TestSuite.test_touch_can_set_active_pattern" />
-        <item itemvalue="Python tests.Python tests for test_lamp.TestSuite.test_can_initialize_led_strip" />
-        <item itemvalue="Python tests.Python tests for test_lamp.TestSuite.test_touch_can_cycle_brightness" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-d68999036c7f-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.14475.56" />
+        <option value="bundled-python-sdk-0509580d9d50-746f403e7f0c-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.14494.241" />
       </set>
     </attachedChunks>
   </component>
@@ -201,7 +215,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713190271062</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="refactoring lamp manager class to inject led strip constructor&#10;&#10;This is needed to do the next step which is setting the brightness level">
+      <option name="closed" value="true" />
+      <created>1713363198778</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1713363198778</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -209,17 +231,7 @@
     <MESSAGE value="Moves setting of led strip values into LampManager class" />
     <MESSAGE value="Adds readme skeleton" />
     <MESSAGE value=":facepalm:" />
-    <option name="LAST_COMMIT_MESSAGE" value=":facepalm:" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/tests/test_lamp.py</url>
-          <line>39</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="refactoring lamp manager class to inject led strip constructor&#10;&#10;This is needed to do the next step which is setting the brightness level" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactoring lamp manager class to inject led strip constructor&#10;&#10;This is needed to do the next step which is setting the brightness level" />
   </component>
 </project>

@@ -92,7 +92,6 @@ class TestSuite:
         assert led_strip[1] == (5, 5, 5)
         assert led_strip[2] == (6, 6, 6)
 
-    # TODO: fix this test to work with injected LED strip
     def test_touching_buttons_can_switch_between_patterns(self):
         patterns = [
             Pattern(
@@ -159,6 +158,67 @@ class TestSuite:
         assert led_strip[2] == (0, 0, 255)
         assert led_strip[3] == (11, 11, 11)
 
+    # ! Note that the brightness level for the NeoPixel library can only be set at initialization, so our manager
+    # ! needs to construct a new instance of the NeoPixel strip each time we want to set the brightness.
+    # ! I can't find the spot in the docs where it explicitly says "it happens at init", but there is a deinit method
+    # ! used to tear down the old instance before creating the new instance.
+    # ? https://github.com/adafruit/Adafruit_CircuitPython_NeoPixel/blob/310621f32839b73f892b227650c5d002a310e7c5/neopixel.py#L144
     def test_can_update_brightness_level(self):
-        pass
-        # ? should the stepping up and down of the brightness level on button click be in this class or in the calling class?
+        strip_length = 4
+        led_strip = [None] * strip_length
+        strip_constructor = MagicMock()
+        initial_brightness_level = 1.0
+        gpio_pin = 1
+        # * The idea here is that we start at full brightness and each time you press the brightness button
+        # * we step down by a tenth until the light is off, then we go back to 1.
+
+        # * defining a helper function to make the tests read a bit more clearly
+        def assert_brightness_level(expected_brightness):
+
+            strip_constructor.assert_called_with(
+                gpio_pin, strip_length, expected_brightness, False
+            )
+
+        lamp = _build_lamp_manager(
+            strip_constructor,
+            led_strip,
+            strip_length,
+            patterns=[],
+            initial_brightness=initial_brightness_level,
+            gpio_pin=gpio_pin,
+        )
+        assert_brightness_level(initial_brightness_level)
+
+        lamp.touch_trigger(2)
+        assert_brightness_level(0.9)
+
+        lamp.touch_trigger(2)
+        lamp.touch_trigger(2)
+        lamp.touch_trigger(2)
+        lamp.touch_trigger(2)
+        lamp.touch_trigger(2)
+        lamp.touch_trigger(2)
+        lamp.touch_trigger(2)
+        lamp.touch_trigger(2)
+        assert_brightness_level(0.1)
+
+        lamp.touch_trigger(2)
+        assert_brightness_level(0.0)
+
+        lamp.touch_trigger(2)
+        assert_brightness_level(1.0)
+
+    def test_invalid_touch_button_value(self):
+        lamp = _build_lamp_manager(
+            strip_length=4,
+            strip_constructor_mock=MagicMock(),
+            led_state=[],
+            initial_brightness=1.0,
+            patterns=[],
+            gpio_pin=1,
+            auto_write=False,
+        )
+
+        with pytest.raises(ValueError) as exception:
+            lamp.touch_trigger(3)
+        assert 'invalid touch value: "3"' == str(exception.value)

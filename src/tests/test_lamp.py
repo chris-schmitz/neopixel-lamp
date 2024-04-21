@@ -36,6 +36,25 @@ def _build_lamp_manager(
 
 class TestSuite:
 
+    @pytest.fixture
+    def mock_neopixel_instance(self):
+        class MockNeopixelInstanceConstructor:
+            def __init__(self, data_size):
+                self.data = [None] * data_size
+
+            def __getitem__(self, index):
+                return self.data[index]
+
+            def __setitem__(self, index, value):
+                self.data[index] = value
+
+            def show(self):
+                pass
+
+        MockNeopixelInstanceConstructor.show = MagicMock()
+
+        return MockNeopixelInstanceConstructor
+
     def test_can_initialize_led_strip(self):
         strip_constructor = MagicMock()
         strip_length = 3
@@ -54,10 +73,10 @@ class TestSuite:
         )
 
         strip_constructor.assert_called_with(
-            gpio_pin, strip_length, brightness_level, auto_write
+            gpio_pin, strip_length, brightness=brightness_level, auto_write=auto_write
         )
 
-    def test_touch_can_set_active_pattern(self):
+    def test_touch_can_set_active_pattern(self, mock_neopixel_instance):
         patterns = [
             Pattern(
                 "pattern 1",
@@ -68,7 +87,8 @@ class TestSuite:
             )
         ]
         strip_length = 3
-        led_strip = [None] * strip_length
+        # led_strip = [None] * strip_length
+        led_strip = mock_neopixel_instance(strip_length)
         strip_constructor = MagicMock()
 
         lamp = _build_lamp_manager(
@@ -79,18 +99,28 @@ class TestSuite:
         assert led_strip[0] == (1, 1, 1)
         assert led_strip[1] == (2, 2, 2)
         assert led_strip[2] == (3, 3, 3)
+        assert led_strip.show.call_count == 1
+        led_strip.show.reset_mock()
+
         lamp.animate_next_frame()
         assert led_strip[0] == (4, 4, 4)
         assert led_strip[1] == (5, 5, 5)
         assert led_strip[2] == (6, 6, 6)
+        assert led_strip.show.call_count == 1
+        led_strip.show.reset_mock()
+
         lamp.animate_next_frame()
         assert led_strip[0] == (1, 1, 1)
         assert led_strip[1] == (2, 2, 2)
         assert led_strip[2] == (3, 3, 3)
+        assert led_strip.show.call_count == 1
+        led_strip.show.reset_mock()
+
         lamp.animate_next_frame()
         assert led_strip[0] == (4, 4, 4)
         assert led_strip[1] == (5, 5, 5)
         assert led_strip[2] == (6, 6, 6)
+        assert led_strip.show.call_count == 1
 
     def test_touching_buttons_can_switch_between_patterns(self):
         patterns = [

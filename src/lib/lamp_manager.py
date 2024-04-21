@@ -20,19 +20,22 @@ class LampManager:
         self._active_pattern_index = 0
 
     def touch_trigger(self, button_touched):
-        match button_touched:
-            case 1:
-                self._increment_active_pattern_index()
-            case 2:
-                self._step_down_brightness_level()
-            case _:
-                raise ValueError(f'invalid touch value: "{button_touched}"')
+        print("touched: ")
+        print(button_touched)
+        if button_touched == 1:
+            self._increment_active_pattern_index()
+        elif button_touched == 2:
+            self._step_down_brightness_level()
+        # else:
+        # raise Exception(f'invalid touch value: "{button_touched}"')
 
     def animate_next_frame(self):
         try:
             frame = self._patterns[self._active_pattern_index].get_next_frame()
+            print(frame)
             for index, pixel in enumerate(frame):
                 self._led_strip[index] = pixel
+            self._led_strip.show()
         except IndexError as error:
             # TODO: talk with andrew, how would I test for this?
             # * the way this class is set up without reaching in to a private property
@@ -48,7 +51,10 @@ class LampManager:
 
     def _initialize_led_strip(self):
         self._led_strip = self._strip_constructor(
-            self._gpio_pin, self._strip_length, self._brightness_level, self._auto_write
+            self._gpio_pin,
+            self._strip_length,
+            brightness=self._brightness_level,
+            auto_write=self._auto_write,
         )
 
     def _set_brightness_level(self, brightness_level):

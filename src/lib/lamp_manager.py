@@ -26,8 +26,8 @@ class LampManager:
             self._increment_active_pattern_index()
         elif button_touched == 2:
             self._step_down_brightness_level()
-        # else:
-        # raise Exception(f'invalid touch value: "{button_touched}"')
+        else:
+            raise ValueError("invalid touch value: " + str(button_touched))
 
     def animate_next_frame(self):
         try:
@@ -64,7 +64,10 @@ class LampManager:
         # * I think we need to make a magic mock that uses the getattribute and set attribute magic methods
         # self._led_strip.deinit()
         self._led_strip = self._strip_constructor(
-            self._gpio_pin, self._strip_length, brightness_level, False
+            self._gpio_pin,
+            self._strip_length,
+            brightness=brightness_level,
+            auto_write=False,
         )
 
     def _step_down_brightness_level(self):

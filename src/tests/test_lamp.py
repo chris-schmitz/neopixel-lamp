@@ -87,7 +87,6 @@ class TestSuite:
             )
         ]
         strip_length = 3
-        # led_strip = [None] * strip_length
         led_strip = mock_neopixel_instance(strip_length)
         strip_constructor = MagicMock()
 
@@ -122,7 +121,7 @@ class TestSuite:
         assert led_strip[2] == (6, 6, 6)
         assert led_strip.show.call_count == 1
 
-    def test_touching_buttons_can_switch_between_patterns(self):
+    def test_touching_buttons_can_switch_between_patterns(self, mock_neopixel_instance):
         patterns = [
             Pattern(
                 "pattern 1",
@@ -143,7 +142,7 @@ class TestSuite:
         strip_constructor = MagicMock()
 
         strip_length = 4
-        led_strip = [None] * strip_length
+        led_strip = mock_neopixel_instance(strip_length)
 
         lamp = _build_lamp_manager(
             strip_constructor, led_strip, strip_length, patterns=patterns
@@ -193,9 +192,9 @@ class TestSuite:
     # ! I can't find the spot in the docs where it explicitly says "it happens at init", but there is a deinit method
     # ! used to tear down the old instance before creating the new instance.
     # ? https://github.com/adafruit/Adafruit_CircuitPython_NeoPixel/blob/310621f32839b73f892b227650c5d002a310e7c5/neopixel.py#L144
-    def test_can_update_brightness_level(self):
+    def test_can_update_brightness_level(self, mock_neopixel_instance):
         strip_length = 4
-        led_strip = [None] * strip_length
+        led_strip = mock_neopixel_instance(strip_length)
         strip_constructor = MagicMock()
         initial_brightness_level = 1.0
         gpio_pin = 1
@@ -204,9 +203,8 @@ class TestSuite:
 
         # * defining a helper function to make the tests read a bit more clearly
         def assert_brightness_level(expected_brightness):
-
             strip_constructor.assert_called_with(
-                gpio_pin, strip_length, expected_brightness, False
+                gpio_pin, strip_length, brightness=expected_brightness, auto_write=False
             )
 
         lamp = _build_lamp_manager(
@@ -251,4 +249,4 @@ class TestSuite:
 
         with pytest.raises(ValueError) as exception:
             lamp.touch_trigger(3)
-        assert 'invalid touch value: "3"' == str(exception.value)
+        assert "invalid touch value: 3" == str(exception.value)

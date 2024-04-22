@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4cdc05d-5ce5-4f58-899f-724b6b5dbd78" name="Changes" comment="Adds brightness settings to class. some code cleanup">
+    <list default="true" id="b4cdc05d-5ce5-4f58-899f-724b6b5dbd78" name="Changes" comment="WIP: refactors code to replace python tools that aren't compatible with circuit python. Adjusts tests to better mock the neopixel instance">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/lamp_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/lamp_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tests/test_lamp.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/test_lamp.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -87,29 +86,7 @@
       <recent name="$PROJECT_DIR$/src/tests" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests for test_lamp.TestSuite.test_touch_can_set_active_pattern">
-    <configuration name="scratch_4" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="rgb-lamp" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$APPLICATION_CONFIG_DIR$/scratches" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/scratch_4.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python tests.Python tests for test_lamp.TestSuite.test_invalid_touch_button_value">
     <configuration name="Python tests for test_lamp.TestSuite" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="rgb-lamp" />
       <option name="ENV_FILES" value="" />
@@ -122,6 +99,21 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;test_lamp.TestSuite&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_lamp.TestSuite.test_can_update_brightness_level" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="rgb-lamp" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_lamp.TestSuite.test_can_update_brightness_level&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -155,7 +147,7 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests in test_lamp.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for test_lamp.TestSuite.test_touching_buttons_can_switch_between_patterns" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="rgb-lamp" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -166,17 +158,17 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/src/tests/test_lamp.py&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <option name="_new_target" value="&quot;test_lamp.TestSuite.test_touching_buttons_can_switch_between_patterns&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Python tests for test_lamp.TestSuite.test_touch_can_set_active_pattern" />
-        <item itemvalue="Python tests.Python tests for test_lamp.TestSuite" />
-        <item itemvalue="Python.scratch_4" />
         <item itemvalue="Python tests.Python tests for test_lamp.TestSuite.test_invalid_touch_button_value" />
-        <item itemvalue="Python tests.Python tests in test_lamp.py" />
+        <item itemvalue="Python tests.Python tests for test_lamp.TestSuite.test_can_update_brightness_level" />
+        <item itemvalue="Python tests.Python tests for test_lamp.TestSuite.test_touching_buttons_can_switch_between_patterns" />
+        <item itemvalue="Python tests.Python tests for test_lamp.TestSuite" />
+        <item itemvalue="Python tests.Python tests for test_lamp.TestSuite.test_touch_can_set_active_pattern" />
       </list>
     </recent_temporary>
   </component>
@@ -244,7 +236,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713582463244</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="WIP: refactors code to replace python tools that aren't compatible with circuit python. Adjusts tests to better mock the neopixel instance">
+      <option name="closed" value="true" />
+      <created>1713717675180</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1713717675180</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -254,14 +254,15 @@
     <MESSAGE value=":facepalm:" />
     <MESSAGE value="refactoring lamp manager class to inject led strip constructor&#10;&#10;This is needed to do the next step which is setting the brightness level" />
     <MESSAGE value="Adds brightness settings to class. some code cleanup" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adds brightness settings to class. some code cleanup" />
+    <MESSAGE value="WIP: refactors code to replace python tools that aren't compatible with circuit python. Adjusts tests to better mock the neopixel instance" />
+    <option name="LAST_COMMIT_MESSAGE" value="WIP: refactors code to replace python tools that aren't compatible with circuit python. Adjusts tests to better mock the neopixel instance" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/tests/test_lamp.py</url>
-          <line>101</line>
+          <line>100</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
